@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:property-placeholder location="classpath:race.properties"/>
+
+    <bean id="asphaltBean"
+          class="ru.ad.lab2.dependencies.Asphalt">
+        <constructor-arg value="${asphaltTrack.turnsCount}"/>
+    </bean>
+
+    <bean id="rallyBean"
+          class="ru.ad.lab2.dependencies.Rally">
+        <constructor-arg value="${rallyTrack.name}"/>
+    </bean>
+
+    <bean id="asphaltRace"
+          class="ru.ad.lab2.Race">
+        <constructor-arg name="name" value="Indianapolis500"/>
+        <constructor-arg name="coverage" ref="asphaltBean"/>
+        <property name="carsCount" value="${asphaltRace.carsCount}"/>
+    </bean>
+
+    <bean id="rallyRace"
+          class="ru.ad.lab2.Race">
+        <constructor-arg name="name" value="RedBullCrazyRace"/>
+        <constructor-arg name="coverage" ref="rallyBean"/>
+        <property name="carsCount" value="${rallyRace.carsCount}"/>
+    </bean>
+
+</beans>
